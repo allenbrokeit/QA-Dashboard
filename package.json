@@ -11,9 +11,14 @@
     "deploy": "npx smbls deploy"
   },
   "dependencies": {
-    "smbls": "4.0.0"
+    "@supabase/supabase-js": "^2.102.1",
+    "smbls": "*"
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "latest"
   }
 }

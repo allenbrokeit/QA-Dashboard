@@ -1,74 +1,40 @@
 export default {
   document: {
-    '@dark': {
-      background: 'codGray',
-      color: 'title',
-    },
-    '@light': {
-      background: 'gray 1 +168',
-      color: 'title',
-    },
+    background: 'surfaceAlt',
+    color: 'title',
   },
   dialog: {
-    '@dark': {
-      background: 'gray 0.95 -68',
-      color: 'title',
-      backdropFilter: 'blur(3px)',
-      borderColor: 'gray 0',
-      outlineColor: 'blue',
-    },
-    '@light': {
-      background: 'gray .95 +150',
-      color: 'title',
-      backdropFilter: 'blur(3px)',
-      borderColor: 'gray 0',
-      outlineColor: 'blue',
-    },
+    background: 'surfaceElevated',
+    color: 'title',
+    backdropFilter: 'blur(3px)',
+    borderColor: 'borderSubtle',
+    outlineColor: 'blue',
+  },
+  'dialog-elevated': {
+    color: 'title',
+    background: 'surfaceElevated',
+    borderColor: 'borderSubtle',
+    outlineColor: 'blue',
+    backgroundKey: 'caption',
   },
   field: {
-    '@dark': {
-      color: 'white',
-      background: 'gray 0.95 -65',
-      '::placeholder': {
-        color: 'white 1 -78',
-      },
-    },
-    '@light': {
-      color: 'black',
-      '::placeholder': {
-        color: 'gray 1 -68',
-      },
+    color: 'title',
+    background: 'surface',
+    '::placeholder': {
+      color: 'disabled',
     },
   },
   primary: {
-    '@dark': {
-      background: 'blue',
-      color: 'white',
-    },
-    '@light': {
-      color: 'white',
-      background: 'blue',
-    },
+    background: 'blue',
+    color: 'white',
   },
   warning: {
-    '@dark': {
-      background: 'red',
-      color: 'white',
-    },
-    '@light': {
-      color: 'white',
-      background: 'red',
-    },
+    background: 'red',
+    color: 'white',
   },
   success: {
-    '@dark': {
-      background: 'green',
-      color: 'white',
-    },
-    '@light': {
-      background: 'green',
-      color: 'white',
-    },
+    background: 'green',
+    color: 'white',
   },
   none: {
     color: 'none',
@@ -77,5 +43,38 @@ export default {
   transparent: {
     color: 'currentColor',
     background: 'transparent',
+  },
+  bordered: {
+    background: 'transparent',
+    border: '1px solid borderSubtle',
+  },
+
+  // QA Status themes
+  statusPass: {
+    background: 'passGreen.1',
+    color: 'passGreen-20',
+    border: '1px solid passGreen.25',
+  },
+  statusFail: {
+    background: 'failRed.08',
+    color: 'failRed-20',
+    border: '1px solid failRed.2',
+  },
+  statusBlocked: {
+    background: 'blockedAmber.1',
+    color: 'blockedAmber-20',
+    border: '1px solid blockedAmber.25',
+  },
+  statusSkipped: {
+    background: 'skippedSlate.08',
+    color: 'skippedSlate-20',
+    border: '1px solid skippedSlate.15',
+  },
+
+  // Surface card
+  card: {
+    background: 'surfaceElevated',
+    borderColor: 'borderSubtle',
+    border: '1px solid borderSubtle',
   },
 }

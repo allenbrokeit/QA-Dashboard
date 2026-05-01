@@ -1,0 +1,2031 @@
+{
+  "useReset": true,
+  "useVariable": true,
+  "useFontImport": true,
+  "useIconSprite": true,
+  "useSvgSprite": true,
+  "useDefaultConfig": true,
+  "useDocumentTheme": true,
+  "verbose": false,
+  "globalTheme": "auto",
+  "cases": {},
+  "state": {
+    "activeEnv": "Staging",
+    "activeRunType": "Full Regression",
+    "environments": [
+      {
+        "id": "env_staging_01",
+        "name": "Staging",
+        "version": "v2.4.1"
+      },
+      {
+        "id": "env_uat_01",
+        "name": "UAT",
+        "version": "v2.3.9"
+      },
+      {
+        "id": "env_prod_01",
+        "name": "Production",
+        "version": "v2.3.7"
+      }
+    ],
+    "runTypes": [
+      "Smoke",
+      "Full Regression",
+      "Sanity",
+      "Exploratory"
+    ],
+    "logModalOpen": false,
+    "logModalTestId": null,
+    "logModalContent": null,
+    "toastMessage": null,
+    "toastType": "error",
+    "selectedTestIds": [],
+    "bulkLoading": false,
+    "isLoading": false,
+    "testRuns": [
+      {
+        "id": "TC-8492",
+        "title": "User Login with Valid Credentials",
+        "suite": "Authentication",
+        "precondition": "User account must exist in the system. Browser cookies cleared.",
+        "status": "passed",
+        "executionTimeMs": 1240,
+        "executedBy": "runner_bot_1",
+        "flakiness": 2,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Navigate to /login",
+            "expectedResult": "Login page renders correctly"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Enter valid email and password",
+            "expectedResult": "Form fields accept input"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Click \"Sign In\" button",
+            "expectedResult": "User is redirected to dashboard"
+          },
+          {
+            "stepNumber": 4,
+            "action": "Verify welcome message present",
+            "expectedResult": "Header shows \"Welcome, User\""
+          }
+        ]
+      },
+      {
+        "id": "TC-8493",
+        "title": "User Login with Invalid Password",
+        "suite": "Authentication",
+        "precondition": "User account must exist. Invalid password used.",
+        "status": "passed",
+        "executionTimeMs": 890,
+        "executedBy": "runner_bot_1",
+        "flakiness": 0,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Navigate to /login",
+            "expectedResult": "Login page renders correctly"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Enter valid email, invalid password",
+            "expectedResult": "Form accepts input"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Click \"Sign In\" button",
+            "expectedResult": "Error message displayed"
+          }
+        ]
+      },
+      {
+        "id": "TC-8501",
+        "title": "Checkout Flow — Add to Cart",
+        "suite": "Checkout",
+        "precondition": "User is logged in. At least one product exists in catalog.",
+        "status": "failed",
+        "executionTimeMs": 3420,
+        "executedBy": "runner_bot_2",
+        "flakiness": 5,
+        "errorMessage": "AssertionError: Expected element \".cart-count\" to contain \"1\" but got \"0\"\n  at CartPage.assertCount (pages/cart.spec.js:88)\n  at Context.<anonymous> (tests/checkout.spec.js:42)\n  at callFn (runner.js:372)",
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Navigate to /products",
+            "expectedResult": "Product listing page loads"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Click \"Add to Cart\" on first product",
+            "expectedResult": "Cart count increments to 1"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Navigate to /cart",
+            "expectedResult": "Cart page shows 1 item"
+          }
+        ]
+      },
+      {
+        "id": "TC-8502",
+        "title": "Checkout Flow — Apply Discount Code",
+        "suite": "Checkout",
+        "precondition": "User has items in cart. Valid discount code SAVE20 exists.",
+        "status": "blocked",
+        "executionTimeMs": 0,
+        "executedBy": "runner_bot_2",
+        "flakiness": 1,
+        "errorMessage": "BLOCKED: Dependency TC-8501 failed. Cannot proceed with checkout without cart.",
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Navigate to /cart with items",
+            "expectedResult": "Cart page renders"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Enter discount code SAVE20",
+            "expectedResult": "Discount applied, total reduced by 20%"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Click \"Apply\"",
+            "expectedResult": "Order summary updates with discounted price"
+          }
+        ]
+      },
+      {
+        "id": "TC-8510",
+        "title": "Password Reset — Email Delivery",
+        "suite": "Authentication",
+        "precondition": "User account exists. Access to test email inbox required.",
+        "status": "skipped",
+        "executionTimeMs": 0,
+        "executedBy": "runner_bot_1",
+        "flakiness": 8,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Click \"Forgot Password\" on login page",
+            "expectedResult": "Reset form displays"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Enter registered email address",
+            "expectedResult": "Confirmation message shown"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Check test email inbox",
+            "expectedResult": "Reset email received within 30s"
+          }
+        ]
+      },
+      {
+        "id": "TC-8520",
+        "title": "Profile — Update Display Name",
+        "suite": "User Profile",
+        "precondition": "User is logged in and on profile settings page.",
+        "status": "passed",
+        "executionTimeMs": 670,
+        "executedBy": "runner_bot_3",
+        "flakiness": 0,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Navigate to /settings/profile",
+            "expectedResult": "Profile settings page loads"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Clear display name field and enter new name",
+            "expectedResult": "Field accepts new value"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Click \"Save Changes\"",
+            "expectedResult": "Success toast appears, header updates"
+          }
+        ]
+      },
+      {
+        "id": "TC-8521",
+        "title": "Profile — Upload Avatar Image",
+        "suite": "User Profile",
+        "precondition": "User is logged in. Valid JPG file under 5MB available.",
+        "status": "failed",
+        "executionTimeMs": 4100,
+        "executedBy": "runner_bot_3",
+        "flakiness": 12,
+        "errorMessage": "TimeoutError: Timed out waiting for upload confirmation after 4000ms\n  Expected: upload success notification\n  Received: spinner still visible (element .upload-spinner still in DOM)\n  at ImageUploadPage.waitForSuccess (pages/profile.spec.js:115)",
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Click avatar upload zone",
+            "expectedResult": "File picker opens"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Select valid JPG file",
+            "expectedResult": "Preview shown"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Click \"Confirm Upload\"",
+            "expectedResult": "Upload completes, avatar updates"
+          }
+        ]
+      },
+      {
+        "id": "TC-8530",
+        "title": "API — GET /users returns 200",
+        "suite": "API Smoke",
+        "precondition": "API service is running. Auth token is valid.",
+        "status": "passed",
+        "executionTimeMs": 220,
+        "executedBy": "runner_bot_4",
+        "flakiness": 0,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Send GET /api/users with Bearer token",
+            "expectedResult": "Response status 200"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Validate response schema",
+            "expectedResult": "Array of user objects returned"
+          }
+        ]
+      },
+      {
+        "id": "TC-8531",
+        "title": "API — POST /orders returns 201",
+        "suite": "API Smoke",
+        "precondition": "Auth token valid. Valid product IDs exist.",
+        "status": "blocked",
+        "executionTimeMs": 0,
+        "executedBy": "runner_bot_4",
+        "flakiness": 3,
+        "errorMessage": "BLOCKED: Environment Staging API gateway returning 503. Service temporarily unavailable.",
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Send POST /api/orders with order payload",
+            "expectedResult": "Response status 201"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Validate order ID in response body",
+            "expectedResult": "Order ID returned"
+          }
+        ]
+      },
+      {
+        "id": "TC-8540",
+        "title": "Responsive Layout — Mobile Breakpoint",
+        "suite": "UI Regression",
+        "precondition": "Browser viewport set to 375x812.",
+        "status": "passed",
+        "executionTimeMs": 1850,
+        "executedBy": "runner_bot_5",
+        "flakiness": 1,
+        "steps": [
+          {
+            "stepNumber": 1,
+            "action": "Set viewport to 375x812",
+            "expectedResult": "Viewport resized"
+          },
+          {
+            "stepNumber": 2,
+            "action": "Navigate to homepage",
+            "expectedResult": "Mobile layout renders"
+          },
+          {
+            "stepNumber": 3,
+            "action": "Verify nav hamburger visible",
+            "expectedResult": "Hamburger icon shown, desktop nav hidden"
+          }
+        ]
+      }
+    ],
+    "expandedTestIds": []
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.102.1",
+    "smbls": "*"
+  },
+  "components": {
+    "BlockedProgressBar": {
+      "flow": "y",
+      "gap": "X",
+      "MetricBarHeader": {
+        "flow": "x",
+        "align": "center space-between",
+        "MetricBarLabel": {
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "text": "Blocked Rate"
+        },
+        "MetricBarCount": {
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "color": "blockedAmber",
+          "text": "(el, s) => \"\" + el.call(\"computeMetrics\").blocked"
+        }
+      },
+      "MetricBarTrack": {
+        "width": "100%",
+        "height": "X",
+        "borderRadius": "X",
+        "background": "gray.1",
+        "overflow": "hidden",
+        "position": "relative",
+        "MetricBarFill": {
+          "position": "absolute",
+          "top": "0",
+          "left": "0",
+          "height": "100%",
+          "borderRadius": "X",
+          "transition": "width 0.6s cubic-bezier(.29,.67,.51,.97)",
+          "background": "blockedAmber",
+          "width": "(el, s) => el.call(\"computeMetrics\").blockedRate + \"%\""
+        }
+      },
+      "MetricBarPct": {
+        "fontSize": "Y",
+        "fontWeight": "500",
+        "color": "disabled",
+        "text": "(el, s) => el.call(\"computeMetrics\").blockedRate + \"%\""
+      }
+    },
+    "BulkActionBar": {
+      "flow": "x",
+      "align": "center space-between",
+      "padding": "Z A",
+      "borderRadius": "Z",
+      "theme": "dialog",
+      "border": "1px solid blue.3",
+      "boxShadow": "blue.15 0 Y A Y",
+      "transition": "all 0.2s ease",
+      "role": "region",
+      "ariaLabel": "Bulk Actions",
+      "if": "(el, s) => (s.root.selectedTestIds || []).length > 0",
+      "SelectionInfo": {
+        "flow": "x",
+        "align": "center center",
+        "gap": "Z",
+        "ariaLive": "polite",
+        "SelectedCount": {
+          "fontSize": "Z",
+          "fontWeight": "700",
+          "color": "blue",
+          "text": "(el, s) => (s.root.selectedTestIds || []).length + \" selected\""
+        },
+        "ClearSelectionBtn": {
+          "tag": "button",
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "padding": "X Y",
+          "borderRadius": "X",
+          "text": "Clear",
+          "ariaLabel": "Clear selection",
+          ":hover": {
+            "color": "title"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "onClick": "(e, el, s) => s.root.update({ selectedTestIds: [] })"
+        }
+      },
+      "BulkActions": {
+        "flow": "x",
+        "align": "center center",
+        "gap": "Y",
+        "BulkPassBtn": {
+          "tag": "button",
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "theme": "statusPass",
+          "border": "1px solid transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Mark selected tests as Passed",
+          ":hover": {
+            "opacity": "0.85"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "BulkPassIcon": {
+            "extends": "Icon",
+            "icon": "checkCircle",
+            "width": "Z",
+            "height": "Z",
+            "ariaHidden": "true"
+          },
+          "BulkPassLabel": {
+            "text": "Pass All",
+            "ariaHidden": "true"
+          },
+          "onClick": "(e, el, s) => {\n        el.call(\"applyBulkStatus\", \"passed\");\n      }"
+        },
+        "BulkFailBtn": {
+          "tag": "button",
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "theme": "statusFail",
+          "border": "1px solid transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Mark selected tests as Failed",
+          ":hover": {
+            "opacity": "0.85"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "BulkFailIcon": {
+            "extends": "Icon",
+            "icon": "xCircle",
+            "width": "Z",
+            "height": "Z",
+            "ariaHidden": "true"
+          },
+          "BulkFailLabel": {
+            "text": "Fail All",
+            "ariaHidden": "true"
+          },
+          "onClick": "(e, el, s) => {\n        el.call(\"applyBulkStatus\", \"failed\");\n      }"
+        },
+        "BulkBlockBtn": {
+          "tag": "button",
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "theme": "statusBlocked",
+          "border": "1px solid transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Mark selected tests as Blocked",
+          ":hover": {
+            "opacity": "0.85"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "BulkBlockIcon": {
+            "extends": "Icon",
+            "icon": "alertCircle",
+            "width": "Z",
+            "height": "Z",
+            "ariaHidden": "true"
+          },
+          "BulkBlockLabel": {
+            "text": "Block All",
+            "ariaHidden": "true"
+          },
+          "onClick": "(e, el, s) => {\n        el.call(\"applyBulkStatus\", \"blocked\");\n      }"
+        },
+        "BulkSkipBtn": {
+          "tag": "button",
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "theme": "statusSkipped",
+          "border": "1px solid transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Mark selected tests as Skipped",
+          ":hover": {
+            "opacity": "0.85"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "BulkSkipIcon": {
+            "extends": "Icon",
+            "icon": "minusCircle",
+            "width": "Z",
+            "height": "Z",
+            "ariaHidden": "true"
+          },
+          "BulkSkipLabel": {
+            "text": "Skip All",
+            "ariaHidden": "true"
+          },
+          "onClick": "(e, el, s) => {\n        el.call(\"applyBulkStatus\", \"skipped\");\n      }"
+        }
+      }
+    },
+    "DashboardHeaderBar": {
+      "tag": "header",
+      "flow": "x",
+      "align": "center space-between",
+      "padding": "Z B",
+      "borderBottom": "1px solid",
+      "borderColor": "borderSubtle",
+      "flexShrink": "0",
+      "flexWrap": "wrap",
+      "gap": "Z",
+      "ariaLabel": "QA Dashboard header",
+      "background": "surfaceAlt",
+      "HeaderLeft": {
+        "flow": "x",
+        "align": "center center",
+        "gap": "A",
+        "LogoArea": {
+          "flow": "x",
+          "align": "center center",
+          "gap": "Y",
+          "LogoIcon": {
+            "extends": "Icon",
+            "icon": "layers",
+            "width": "A",
+            "height": "A",
+            "color": "blue",
+            "ariaHidden": "true"
+          },
+          "AppTitle": {
+            "tag": "h1",
+            "fontSize": "Z",
+            "fontWeight": "800",
+            "letterSpacing": "-0.02em",
+            "color": "title",
+            "text": "QA Dashboard"
+          }
+        },
+        "RunIdBadge": {
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "background": "blue.1",
+          "border": "1px solid blue.2",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "fontFamily": "\"JetBrains Mono\", monospace",
+          "color": "blue",
+          "text": "RUN-2024-APR-08",
+          "role": "status",
+          "ariaLabel": "Current run ID: RUN-2024-APR-08"
+        }
+      },
+      "HeaderRight": {
+        "flow": "x",
+        "align": "center center",
+        "gap": "Z",
+        "flexWrap": "wrap",
+        "EnvFilterGroup": {
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "role": "group",
+          "ariaLabel": "Filter by environment",
+          "FilterLabel": {
+            "fontSize": "Y",
+            "fontWeight": "500",
+            "color": "caption",
+            "text": "Env:",
+            "ariaHidden": "true"
+          },
+          "EnvButtonList": {
+            "flow": "x",
+            "align": "center center",
+            "gap": "X",
+            "padding": "X",
+            "borderRadius": "Z",
+            "background": "gray.06",
+            "border": "1px solid",
+            "borderColor": "borderSubtle",
+            "children": "(el, s) => s.root.environments || []",
+            "childExtends": "EnvFilterBtn",
+            "childrenAs": "state"
+          }
+        },
+        "Divider": {
+          "width": "1px",
+          "height": "A",
+          "background": "borderSubtle",
+          "ariaHidden": "true"
+        },
+        "RunTypeFilterGroup": {
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "role": "group",
+          "ariaLabel": "Filter by run type",
+          "RunTypeLabel": {
+            "fontSize": "Y",
+            "fontWeight": "500",
+            "color": "caption",
+            "text": "Run:",
+            "ariaHidden": "true"
+          },
+          "RunTypeList": {
+            "flow": "x",
+            "align": "center center",
+            "gap": "X",
+            "padding": "X",
+            "borderRadius": "Z",
+            "background": "gray.06",
+            "border": "1px solid",
+            "borderColor": "borderSubtle",
+            "children": "(el, s) => (s.root.runTypes || []).map((rt) => ({ name: rt }))",
+            "childExtends": "RunTypeFilterBtn",
+            "childrenAs": "state"
+          }
+        },
+        "RefreshBtn": {
+          "tag": "button",
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "border": "1px solid",
+          "borderColor": "borderSubtle",
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "background": "transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Refresh dashboard data",
+          ":hover": {
+            "borderColor": "blue",
+            "color": "blue"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "RefreshIcon": {
+            "extends": "Icon",
+            "icon": "refresh",
+            "width": "Z",
+            "height": "Z",
+            "ariaHidden": "true"
+          },
+          "RefreshLabel": {
+            "text": "Refresh"
+          },
+          "onClick": "(e, el, s) => {\n        s.root.update({ isLoading: true });\n        setTimeout(() => {\n          s.root.update({ isLoading: false });\n        }, 800);\n      }"
+        }
+      }
+    },
+    "DashboardLayout": {
+      "flow": "y",
+      "width": "100%",
+      "minHeight": "100vh",
+      "position": "relative",
+      "TopBar": {
+        "extends": "DashboardHeaderBar"
+      },
+      "MainContentArea": {
+        "flow": "y",
+        "flex": "1",
+        "gap": "A",
+        "padding": "A B",
+        "overflow": "auto",
+        "@tabletS": {
+          "padding": "Z A"
+        },
+        "MetricsPanel": {
+          "extends": "MetricsOverviewPanel"
+        },
+        "TestGrid": {
+          "extends": "ExpandableTestGrid"
+        }
+      },
+      "LogModal": {
+        "extends": "LogViewerModal"
+      },
+      "Toast": {
+        "extends": "ToastNotification"
+      }
+    },
+    "EnvFilterBtn": {
+      "tag": "button",
+      "padding": "X Y",
+      "borderRadius": "Y",
+      "cursor": "pointer",
+      "fontSize": "Y",
+      "fontWeight": "600",
+      "border": "none",
+      "transition": "all 0.15s ease",
+      "text": "(el, s) => s.name",
+      "ariaPressed": "(el, s) => s.root.activeEnv === s.name",
+      ":focus-visible": {
+        "outline": "2px solid blue",
+        "outlineOffset": "2px"
+      },
+      "isActive": "(el, s) => s.root.activeEnv === s.name",
+      ".isActive": {
+        "background": "blue",
+        "color": "white"
+      },
+      ".!isActive": {
+        "background": "transparent",
+        "color": "caption",
+        ":hover": {
+          "color": "title",
+          "background": "gray.1"
+        }
+      },
+      "onClick": "(e, el, s) => {\n    s.root.update({ activeEnv: s.name });\n  }"
+    },
+    "ExecutionStatusToggle": {
+      "tag": "button",
+      "flow": "x",
+      "align": "center center",
+      "gap": "Y",
+      "padding": "Y Z",
+      "borderRadius": "Y",
+      "cursor": "pointer",
+      "fontSize": "Y",
+      "fontWeight": "600",
+      "letterSpacing": "0.04em",
+      "textTransform": "uppercase",
+      "border": "1px solid transparent",
+      "transition": "all 0.15s ease",
+      "userSelect": "none",
+      "whiteSpace": "nowrap",
+      "ariaLabel": "(el, s) => \"Status: \" + (s.status || \"untested\") + \". Click to cycle status.\"",
+      ":focus-visible": {
+        "outline": "2px solid blue",
+        "outlineOffset": "2px"
+      },
+      "isPass": "(el, s) => s.status === \"passed\"",
+      ".isPass": {
+        "theme": "statusPass"
+      },
+      "isFail": "(el, s) => s.status === \"failed\"",
+      ".isFail": {
+        "theme": "statusFail"
+      },
+      "isBlocked": "(el, s) => s.status === \"blocked\"",
+      ".isBlocked": {
+        "theme": "statusBlocked"
+      },
+      "isSkipped": "(el, s) => s.status === \"skipped\" || s.status === \"untested\"",
+      ".isSkipped": {
+        "theme": "statusSkipped"
+      },
+      ":hover": {
+        "opacity": "0.85",
+        "transform": "scale(1.02)"
+      },
+      ":active": {
+        "transform": "scale(0.98)"
+      },
+      "StatusIcon": {
+        "extends": "Icon",
+        "width": "Z",
+        "height": "Z",
+        "icon": "(el, s) => el.call(\"getStatusIcon\", s.status)",
+        "ariaHidden": "true"
+      },
+      "StatusLabel": {
+        "text": "(el, s) => el.call(\"getStatusLabel\", s.status)",
+        "ariaHidden": "true"
+      },
+      "onClick": "(e, el, s) => {\n    var cycle = { passed: \"failed\", failed: \"blocked\", blocked: \"skipped\", skipped: \"passed\", untested: \"passed\" };\n    var nextStatus = cycle[s.status] || \"passed\";\n    el.call(\"toggleTestStatus\", s.id, nextStatus);\n  }"
+    },
+    "ExpandableTestGrid": {
+      "flow": "y",
+      "borderRadius": "Z",
+      "theme": "card",
+      "overflow": "hidden",
+      "role": "region",
+      "ariaLabel": "Test Cases Grid",
+      "GridHeaderSection": {
+        "flow": "x",
+        "align": "center space-between",
+        "padding": "Z A",
+        "borderBottom": "1px solid",
+        "borderColor": "borderSubtle",
+        "flexWrap": "wrap",
+        "gap": "Z",
+        "GridTitle": {
+          "tag": "h2",
+          "fontSize": "Z",
+          "fontWeight": "700",
+          "color": "title",
+          "text": "Test Cases"
+        },
+        "GridMeta": {
+          "fontSize": "Y",
+          "color": "caption",
+          "text": "(el, s) => (s.root.testRuns || []).length + \" cases \\xB7 \" + s.root.activeEnv + \" \\xB7 \" + s.root.activeRunType"
+        }
+      },
+      "BulkBar": {
+        "extends": "BulkActionBar",
+        "margin": "Y A"
+      },
+      "GridColHeaders": {
+        "flow": "x",
+        "align": "center start",
+        "padding": "Y A",
+        "background": "gray.04",
+        "borderBottom": "1px solid",
+        "borderColor": "borderSubtle",
+        "gap": "0",
+        "fontSize": "Y",
+        "fontWeight": "600",
+        "letterSpacing": "0.05em",
+        "textTransform": "uppercase",
+        "color": "disabled",
+        "HeaderCheckboxCell": {
+          "flex": "0 0 auto",
+          "width": "B",
+          "flow": "x",
+          "align": "center center",
+          "SelectAllCheckbox": {
+            "tag": "input",
+            "type": "checkbox",
+            "cursor": "pointer",
+            "width": "Z",
+            "height": "Z",
+            "accentColor": "blue",
+            "ariaLabel": "Select all test cases",
+            "checked": "(el, s) => {\n          var runs = s.root.testRuns || [];\n          var selected = s.root.selectedTestIds || [];\n          return runs.length > 0 && selected.length === runs.length;\n        }",
+            "onClick": "(e, el, s) => el.call(\"toggleSelectAll\")"
+          }
+        },
+        "HeaderExpandCell": {
+          "flex": "0 0 auto",
+          "width": "B"
+        },
+        "HeaderIdCell": {
+          "flex": "0 0 auto",
+          "width": "E",
+          "text": "ID"
+        },
+        "HeaderTitleCell": {
+          "flex": "1",
+          "text": "Title"
+        },
+        "HeaderSuiteCell": {
+          "flex": "0 0 auto",
+          "width": "F",
+          "text": "Suite",
+          "@tabletS": {
+            "display": "none"
+          }
+        },
+        "HeaderStatusCell": {
+          "flex": "0 0 auto",
+          "width": "G",
+          "text": "Status"
+        },
+        "HeaderTimeCell": {
+          "flex": "0 0 auto",
+          "width": "E",
+          "text": "Time",
+          "@tabletS": {
+            "display": "none"
+          }
+        },
+        "HeaderActionsCell": {
+          "flex": "0 0 auto",
+          "width": "C",
+          "text": "Log"
+        }
+      },
+      "TestRowsList": {
+        "flow": "y",
+        "gap": "0",
+        "children": "(el, s) => s.root.testRuns || []",
+        "childExtends": "TestGridRow",
+        "childrenAs": "state"
+      }
+    },
+    "FailProgressBar": {
+      "flow": "y",
+      "gap": "X",
+      "MetricBarHeader": {
+        "flow": "x",
+        "align": "center space-between",
+        "MetricBarLabel": {
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "text": "Fail Rate"
+        },
+        "MetricBarCount": {
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "color": "failRed",
+          "text": "(el, s) => \"\" + el.call(\"computeMetrics\").failed"
+        }
+      },
+      "MetricBarTrack": {
+        "width": "100%",
+        "height": "X",
+        "borderRadius": "X",
+        "background": "gray.1",
+        "overflow": "hidden",
+        "position": "relative",
+        "MetricBarFill": {
+          "position": "absolute",
+          "top": "0",
+          "left": "0",
+          "height": "100%",
+          "borderRadius": "X",
+          "transition": "width 0.6s cubic-bezier(.29,.67,.51,.97)",
+          "background": "failRed",
+          "width": "(el, s) => el.call(\"computeMetrics\").failRate + \"%\""
+        }
+      },
+      "MetricBarPct": {
+        "fontSize": "Y",
+        "fontWeight": "500",
+        "color": "disabled",
+        "text": "(el, s) => el.call(\"computeMetrics\").failRate + \"%\""
+      }
+    },
+    "LogViewerModal": {
+      "role": "dialog",
+      "ariaModal": "true",
+      "ariaLabelledBy": "log-modal-title",
+      "position": "fixed",
+      "top": "0",
+      "right": "0",
+      "bottom": "0",
+      "width": "G",
+      "maxWidth": "100vw",
+      "flow": "y",
+      "theme": "dialog",
+      "borderLeft": "1px solid",
+      "borderColor": "borderSubtle",
+      "zIndex": "1000",
+      "transition": "transform 0.28s cubic-bezier(.29,.67,.51,.97)",
+      "boxShadow": "black.3 -C 0 E Z",
+      "if": "(el, s) => s.root.logModalOpen",
+      "isOpen": "(el, s) => s.root.logModalOpen",
+      ".isOpen": {
+        "transform": "translateX(0)"
+      },
+      "ModalHeaderBar": {
+        "flow": "x",
+        "align": "center space-between",
+        "padding": "A B",
+        "borderBottom": "1px solid borderSubtle",
+        "flexShrink": "0",
+        "ModalTitleGroup": {
+          "flow": "y",
+          "gap": "X",
+          "ModalIcon": {
+            "extends": "Icon",
+            "icon": "terminal",
+            "width": "A",
+            "height": "A",
+            "color": "failRed",
+            "ariaHidden": "true"
+          },
+          "ModalTitle": {
+            "tag": "h3",
+            "id": "log-modal-title",
+            "fontSize": "Z",
+            "fontWeight": "700",
+            "color": "title",
+            "text": "Error Log"
+          },
+          "ModalSubtitle": {
+            "fontSize": "Y",
+            "color": "caption",
+            "text": "(el, s) => s.root.logModalTestId ? \"Test: \" + s.root.logModalTestId : \"Test log\""
+          }
+        },
+        "CloseModalBtn": {
+          "tag": "button",
+          "padding": "Y",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "background": "transparent",
+          "border": "none",
+          "color": "caption",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "Close error log",
+          ":hover": {
+            "background": "gray.1",
+            "color": "title"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "CloseIcon": {
+            "extends": "Icon",
+            "icon": "close",
+            "width": "A",
+            "height": "A",
+            "ariaHidden": "true"
+          },
+          "onClick": "(e, el, s) => el.call(\"closeLogModal\")"
+        }
+      },
+      "LogContentArea": {
+        "flex": "1",
+        "overflow": "auto",
+        "padding": "A B",
+        "LogPre": {
+          "tag": "pre",
+          "fontFamily": "\"JetBrains Mono\", \"Fira Code\", monospace",
+          "fontSize": "Y",
+          "lineHeight": "1.7",
+          "color": "failRed",
+          "background": "transparent",
+          "whiteSpace": "pre-wrap",
+          "wordBreak": "break-word",
+          "margin": "0",
+          "text": "(el, s) => s.root.logModalContent || \"No log content available.\"",
+          "tabindex": "0",
+          "ariaLabel": "Log output content",
+          "@dark": {
+            "color": "failRed"
+          },
+          "@light": {
+            "color": "failRed-20"
+          }
+        }
+      },
+      "ModalFooter": {
+        "flow": "x",
+        "align": "center space-between",
+        "padding": "Z B",
+        "borderTop": "1px solid borderSubtle",
+        "flexShrink": "0",
+        "FooterNote": {
+          "fontSize": "Y",
+          "color": "disabled",
+          "text": "Stack trace from last failed run"
+        },
+        "DismissBtn": {
+          "tag": "button",
+          "padding": "Y Z",
+          "borderRadius": "Y",
+          "cursor": "pointer",
+          "theme": "dialog",
+          "border": "1px solid borderSubtle",
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "transition": "all 0.15s ease",
+          "text": "Close",
+          "ariaLabel": "Close error log dialog",
+          ":hover": {
+            "border": "1px solid blue",
+            "color": "blue"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "onClick": "(e, el, s) => el.call(\"closeLogModal\")"
+        }
+      }
+    },
+    "MetricProgressBar": {
+      "flow": "y",
+      "gap": "X",
+      "MetricBarHeader": {
+        "flow": "x",
+        "align": "center space-between",
+        "MetricBarLabel": {
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "text": "Metric"
+        },
+        "MetricBarCount": {
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "text": "0"
+        }
+      },
+      "MetricBarTrack": {
+        "width": "100%",
+        "height": "X",
+        "borderRadius": "X",
+        "background": "gray.1",
+        "overflow": "hidden",
+        "position": "relative",
+        "MetricBarFill": {
+          "position": "absolute",
+          "top": "0",
+          "left": "0",
+          "height": "100%",
+          "borderRadius": "X",
+          "transition": "width 0.6s cubic-bezier(.29,.67,.51,.97)",
+          "background": "gray",
+          "width": "0%"
+        }
+      },
+      "MetricBarPct": {
+        "fontSize": "Y",
+        "fontWeight": "500",
+        "color": "disabled",
+        "text": "0%"
+      }
+    },
+    "MetricsOverviewPanel": {
+      "role": "region",
+      "ariaLabel": "Run Health Metrics",
+      "flow": "y",
+      "gap": "A",
+      "padding": "A B",
+      "borderRadius": "Z",
+      "theme": "card",
+      "PanelHeaderRow": {
+        "flow": "x",
+        "align": "center space-between",
+        "PanelTitle": {
+          "tag": "h2",
+          "fontSize": "Z",
+          "fontWeight": "700",
+          "letterSpacing": "-0.01em",
+          "color": "title",
+          "text": "Run Health"
+        },
+        "RunStatusBadge": {
+          "flow": "x",
+          "align": "center center",
+          "gap": "X",
+          "padding": "X Z",
+          "borderRadius": "Y",
+          "fontSize": "Y",
+          "fontWeight": "600",
+          "border": "1px solid transparent",
+          "role": "status",
+          "ariaLive": "polite",
+          "isHealthy": "(el, s) => el.call(\"computeMetrics\").passRate >= 80",
+          ".isHealthy": {
+            "theme": "statusPass"
+          },
+          "isDegraded": "(el, s) => {\n        var m = el.call(\"computeMetrics\");\n        return m.passRate >= 50 && m.passRate < 80;\n      }",
+          ".isDegraded": {
+            "theme": "statusBlocked"
+          },
+          "isCritical": "(el, s) => el.call(\"computeMetrics\").passRate < 50",
+          ".isCritical": {
+            "theme": "statusFail"
+          },
+          "StatusDot": {
+            "width": "X",
+            "height": "X",
+            "borderRadius": "50%",
+            "background": "currentColor",
+            "ariaHidden": "true"
+          },
+          "StatusText": {
+            "text": "(el, s) => {\n          var m = el.call(\"computeMetrics\");\n          if (m.passRate >= 80) return \"Healthy\";\n          if (m.passRate >= 50) return \"Degraded\";\n          return \"Critical\";\n        }"
+          }
+        }
+      },
+      "MetricSummaryGrid": {
+        "flow": "x",
+        "gap": "Z",
+        "align": "center stretch",
+        "flexWrap": "wrap",
+        "PassStat": {
+          "flow": "y",
+          "align": "center center",
+          "gap": "X",
+          "padding": "Z A",
+          "borderRadius": "Z",
+          "background": "passGreen.08",
+          "border": "1px solid passGreen.15",
+          "flex": "1",
+          "minWidth": "D",
+          "ariaLabel": "(el, s) => el.call(\"computeMetrics\").passed + \" passed tests\"",
+          "StatNumber": {
+            "tag": "span",
+            "fontSize": "C",
+            "fontWeight": "800",
+            "color": "passGreen",
+            "letterSpacing": "-0.03em",
+            "text": "(el, s) => \"\" + el.call(\"computeMetrics\").passed",
+            "ariaHidden": "true"
+          },
+          "StatLabel": {
+            "tag": "span",
+            "fontSize": "Y",
+            "fontWeight": "600",
+            "color": "passGreen",
+            "opacity": "0.7",
+            "textTransform": "uppercase",
+            "letterSpacing": "0.06em",
+            "text": "Passed",
+            "ariaHidden": "true"
+          }
+        },
+        "FailStat": {
+          "flow": "y",
+          "align": "center center",
+          "gap": "X",
+          "padding": "Z A",
+          "borderRadius": "Z",
+          "background": "failRed.08",
+          "border": "1px solid failRed.15",
+          "flex": "1",
+          "minWidth": "D",
+          "ariaLabel": "(el, s) => el.call(\"computeMetrics\").failed + \" failed tests\"",
+          "StatNumber": {
+            "tag": "span",
+            "fontSize": "C",
+            "fontWeight": "800",
+            "color": "failRed",
+            "letterSpacing": "-0.03em",
+            "text": "(el, s) => \"\" + el.call(\"computeMetrics\").failed",
+            "ariaHidden": "true"
+          },
+          "StatLabel": {
+            "tag": "span",
+            "fontSize": "Y",
+            "fontWeight": "600",
+            "color": "failRed",
+            "opacity": "0.7",
+            "textTransform": "uppercase",
+            "letterSpacing": "0.06em",
+            "text": "Failed",
+            "ariaHidden": "true"
+          }
+        },
+        "BlockedStat": {
+          "flow": "y",
+          "align": "center center",
+          "gap": "X",
+          "padding": "Z A",
+          "borderRadius": "Z",
+          "background": "blockedAmber.08",
+          "border": "1px solid blockedAmber.15",
+          "flex": "1",
+          "minWidth": "D",
+          "ariaLabel": "(el, s) => el.call(\"computeMetrics\").blocked + \" blocked tests\"",
+          "StatNumber": {
+            "tag": "span",
+            "fontSize": "C",
+            "fontWeight": "800",
+            "color": "blockedAmber",
+            "letterSpacing": "-0.03em",
+            "text": "(el, s) => \"\" + el.call(\"computeMetrics\").blocked",
+            "ariaHidden": "true"
+          },
+          "StatLabel": {
+            "tag": "span",
+            "fontSize": "Y",
+            "fontWeight": "600",
+            "color": "blockedAmber",
+            "opacity": "0.7",
+            "textTransform": "uppercase",
+            "letterSpacing": "0.06em",
+            "text": "Blocked",
+            "ariaHidden": "true"
+          }
+        },
+        "SkippedStat": {
+          "flow": "y",
+          "align": "center center",
+          "gap": "X",
+          "padding": "Z A",
+          "borderRadius": "Z",
+          "background": "skippedSlate.08",
+          "border": "1px solid skippedSlate.15",
+          "flex": "1",
+          "minWidth": "D",
+          "ariaLabel": "(el, s) => el.call(\"computeMetrics\").skipped + \" skipped tests\"",
+          "StatNumber": {
+            "tag": "span",
+            "fontSize": "C",
+            "fontWeight": "800",
+            "color": "skippedSlate",
+            "letterSpacing": "-0.03em",
+            "text": "(el, s) => \"\" + el.call(\"computeMetrics\").skipped",
+            "ariaHidden": "true"
+          },
+          "StatLabel": {
+            "tag": "span",
+            "fontSize": "Y",
+            "fontWeight": "600",
+            "color": "skippedSlate",
+            "opacity": "0.7",
+            "textTransform": "uppercase",
+            "letterSpacing": "0.06em",
+            "text": "Skipped",
+            "ariaHidden": "true"
+          }
+        }
+      },
+      "MetricBarsSection": {
+        "flow": "y",
+        "gap": "Z",
+        "ariaHidden": "true",
+        "PassBar": {
+          "extends": "PassProgressBar"
+        },
+        "FailBar": {
+          "extends": "FailProgressBar"
+        },
+        "BlockedBar": {
+          "extends": "BlockedProgressBar"
+        }
+      },
+      "MetricFooter": {
+        "flow": "x",
+        "align": "center space-between",
+        "paddingTop": "Z",
+        "borderTop": "1px solid",
+        "borderColor": "borderSubtle",
+        "TotalCount": {
+          "fontSize": "Y",
+          "color": "caption",
+          "text": "(el, s) => el.call(\"computeMetrics\").total + \" tests total\""
+        },
+        "PassRateLarge": {
+          "fontSize": "A",
+          "fontWeight": "800",
+          "color": "title",
+          "isPassHigh": "(el, s) => el.call(\"computeMetrics\").passRate >= 80",
+          ".isPassHigh": {
+            "color": "passGreen"
+          },
+          "isPassMid": "(el, s) => {\n        var r = el.call(\"computeMetrics\").passRate;\n        return r >= 50 && r < 80;\n      }",
+          ".isPassMid": {
+            "color": "blockedAmber"
+          },
+          "isPassLow": "(el, s) => el.call(\"computeMetrics\").passRate < 50",
+          ".isPassLow": {
+            "color": "failRed"
+          },
+          "text": "(el, s) => el.call(\"computeMetrics\").passRate + \"% pass\""
+        }
+      }
+    },
+    "PassProgressBar": {
+      "flow": "y",
+      "gap": "X",
+      "MetricBarHeader": {
+        "flow": "x",
+        "align": "center space-between",
+        "MetricBarLabel": {
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "text": "Pass Rate"
+        },
+        "MetricBarCount": {
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "color": "passGreen",
+          "text": "(el, s) => \"\" + el.call(\"computeMetrics\").passed"
+        }
+      },
+      "MetricBarTrack": {
+        "width": "100%",
+        "height": "X",
+        "borderRadius": "X",
+        "background": "gray.1",
+        "overflow": "hidden",
+        "position": "relative",
+        "MetricBarFill": {
+          "position": "absolute",
+          "top": "0",
+          "left": "0",
+          "height": "100%",
+          "borderRadius": "X",
+          "transition": "width 0.6s cubic-bezier(.29,.67,.51,.97)",
+          "background": "passGreen",
+          "width": "(el, s) => el.call(\"computeMetrics\").passRate + \"%\""
+        }
+      },
+      "MetricBarPct": {
+        "fontSize": "Y",
+        "fontWeight": "500",
+        "color": "disabled",
+        "text": "(el, s) => el.call(\"computeMetrics\").passRate + \"%\""
+      }
+    },
+    "RunTypeFilterBtn": {
+      "tag": "button",
+      "padding": "X Y",
+      "borderRadius": "Y",
+      "cursor": "pointer",
+      "fontSize": "Y",
+      "fontWeight": "600",
+      "border": "none",
+      "transition": "all 0.15s ease",
+      "text": "(el, s) => s.name",
+      "ariaPressed": "(el, s) => s.root.activeRunType === s.name",
+      ":focus-visible": {
+        "outline": "2px solid blue",
+        "outlineOffset": "2px"
+      },
+      "isActive": "(el, s) => s.root.activeRunType === s.name",
+      ".isActive": {
+        "background": "blue",
+        "color": "white"
+      },
+      ".!isActive": {
+        "background": "transparent",
+        "color": "caption",
+        ":hover": {
+          "color": "title",
+          "background": "gray.1"
+        }
+      },
+      "onClick": "(e, el, s) => {\n    s.root.update({ activeRunType: s.name });\n  }"
+    },
+    "TestGridRow": {
+      "flow": "y",
+      "borderBottom": "1px solid",
+      "borderColor": "borderSubtle",
+      "transition": "background 0.15s ease",
+      ":last-child": {
+        "borderBottom": "none"
+      },
+      ":hover": {
+        "background": "gray.04"
+      },
+      "isSelected": "(el, s) => (s.root.selectedTestIds || []).includes(s.id)",
+      ".isSelected": {
+        "background": "blue.04",
+        ":hover": {
+          "background": "blue.06"
+        }
+      },
+      "RowMain": {
+        "flow": "x",
+        "align": "center start",
+        "padding": "Y A",
+        "gap": "0",
+        "cursor": "default",
+        "RowCheckboxCell": {
+          "flex": "0 0 auto",
+          "width": "B",
+          "flow": "x",
+          "align": "center center",
+          "RowCheckbox": {
+            "tag": "input",
+            "type": "checkbox",
+            "cursor": "pointer",
+            "width": "Z",
+            "height": "Z",
+            "accentColor": "blue",
+            "ariaLabel": "(el, s) => \"Select test case \" + s.id",
+            "checked": "(el, s) => (s.root.selectedTestIds || []).includes(s.id)",
+            "onClick": "(e, el, s) => {\n          e.stopPropagation();\n          el.call(\"toggleSelectTest\", s.id);\n        }"
+          }
+        },
+        "ExpandToggleCell": {
+          "tag": "button",
+          "flex": "0 0 auto",
+          "width": "B",
+          "flow": "x",
+          "align": "center center",
+          "cursor": "pointer",
+          "padding": "Y",
+          "borderRadius": "X",
+          "border": "none",
+          "background": "transparent",
+          "transition": "all 0.15s ease",
+          "ariaLabel": "(el, s) => \"Expand details for \" + s.id",
+          "ariaExpanded": "(el, s) => (s.root.expandedTestIds || []).includes(s.id)",
+          ":hover": {
+            "background": "gray.1"
+          },
+          ":focus-visible": {
+            "outline": "2px solid blue",
+            "outlineOffset": "2px"
+          },
+          "ExpandChevronWrap": {
+            "width": "Z",
+            "height": "Z",
+            "transition": "transform 0.2s ease",
+            "color": "caption",
+            "ariaHidden": "true",
+            "isExpanded": "(el, s) => (s.root.expandedTestIds || []).includes(s.id)",
+            ".isExpanded": {
+              "transform": "rotate(90deg)"
+            },
+            "ExpandChevron": {
+              "extends": "Icon",
+              "icon": "chevronRight",
+              "width": "100%",
+              "height": "100%"
+            }
+          },
+          "onClick": "(e, el, s) => {\n        e.stopPropagation();\n        el.call(\"toggleRowExpand\", s.id);\n      }"
+        },
+        "RowIdCell": {
+          "flex": "0 0 auto",
+          "width": "E",
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "color": "blue",
+          "fontFamily": "\"JetBrains Mono\", monospace",
+          "text": "(el, s) => s.id"
+        },
+        "RowTitleCell": {
+          "flex": "1",
+          "flow": "y",
+          "gap": "X",
+          "paddingRight": "Z",
+          "RowTitle": {
+            "fontSize": "Z",
+            "fontWeight": "500",
+            "color": "title",
+            "text": "(el, s) => s.title",
+            "lineHeight": "1.4"
+          },
+          "FlakinessBadge": {
+            "if": "(el, s) => (s.flakiness || 0) > 0",
+            "flow": "x",
+            "align": "center center",
+            "gap": "X",
+            "display": "inline-flex",
+            "FlakinessIcon": {
+              "extends": "Icon",
+              "icon": "alertTriangle",
+              "width": "X",
+              "height": "X",
+              "color": "blockedAmber",
+              "ariaHidden": "true"
+            },
+            "FlakinessText": {
+              "fontSize": "Y",
+              "color": "blockedAmber",
+              "fontWeight": "500",
+              "text": "(el, s) => s.flakiness + \"% flaky\""
+            }
+          }
+        },
+        "RowSuiteCell": {
+          "flex": "0 0 auto",
+          "width": "F",
+          "@tabletS": {
+            "display": "none"
+          },
+          "SuiteBadge": {
+            "padding": "X Y",
+            "borderRadius": "Y",
+            "background": "blue.08",
+            "color": "blue",
+            "fontSize": "Y",
+            "fontWeight": "500",
+            "display": "inline-block",
+            "text": "(el, s) => s.suite"
+          }
+        },
+        "RowStatusCell": {
+          "flex": "0 0 auto",
+          "width": "G",
+          "ToggleBtn": {
+            "extends": "ExecutionStatusToggle",
+            "id": "(el, s) => s.id",
+            "status": "(el, s) => s.status"
+          }
+        },
+        "RowTimeCell": {
+          "flex": "0 0 auto",
+          "width": "E",
+          "fontSize": "Y",
+          "fontWeight": "500",
+          "color": "caption",
+          "fontFamily": "\"JetBrains Mono\", monospace",
+          "@tabletS": {
+            "display": "none"
+          },
+          "text": "(el, s) => el.call(\"formatDuration\", s.executionTimeMs)"
+        },
+        "RowActionsCell": {
+          "flex": "0 0 auto",
+          "width": "C",
+          "flow": "x",
+          "align": "center center",
+          "ViewLogBtn": {
+            "tag": "button",
+            "padding": "Y",
+            "borderRadius": "Y",
+            "cursor": "pointer",
+            "background": "transparent",
+            "border": "none",
+            "color": "caption",
+            "transition": "all 0.15s ease",
+            "ariaLabel": "(el, s) => \"View error log for \" + s.id",
+            "isFailedLog": "(el, s) => s.status === \"failed\" || s.status === \"blocked\"",
+            ".isFailedLog": {
+              "color": "failRed"
+            },
+            ":hover": {
+              "background": "gray.1",
+              "color": "title"
+            },
+            ":focus-visible": {
+              "outline": "2px solid blue",
+              "outlineOffset": "2px"
+            },
+            "LogIcon": {
+              "extends": "Icon",
+              "icon": "logFile",
+              "width": "Z",
+              "height": "Z",
+              "ariaHidden": "true"
+            },
+            "onClick": "(e, el, s) => {\n          e.stopPropagation();\n          el.call(\"openLogModal\", s.id, s.errorMessage);\n        }"
+          }
+        }
+      },
+      "StepsPanel": {
+        "extends": "TestStepsList",
+        "show": "(el, s) => (s.root.expandedTestIds || []).includes(s.id)",
+        "steps": "(el, s) => s.steps",
+        "precondition": "(el, s) => s.precondition"
+      }
+    },
+    "TestStepItem": {
+      "flow": "x",
+      "align": "flex-start start",
+      "gap": "Z",
+      "paddingTop": "Y",
+      "borderTop": "1px solid",
+      "borderColor": "borderSubtle",
+      "StepNumber": {
+        "flex": "0 0 auto",
+        "width": "A",
+        "height": "A",
+        "borderRadius": "50%",
+        "align": "center center",
+        "flow": "x",
+        "background": "blue.1",
+        "border": "1px solid blue.2",
+        "fontSize": "Y",
+        "fontWeight": "700",
+        "color": "blue",
+        "text": "(el, s) => \"\" + s.stepNumber"
+      },
+      "StepContent": {
+        "flow": "y",
+        "gap": "X",
+        "flex": "1",
+        "StepAction": {
+          "fontSize": "Z",
+          "fontWeight": "500",
+          "color": "title",
+          "text": "(el, s) => s.action"
+        },
+        "StepExpected": {
+          "fontSize": "Y",
+          "fontWeight": "400",
+          "color": "caption",
+          "text": "(el, s) => \"Expected: \" + s.expectedResult"
+        }
+      }
+    },
+    "TestStepsList": {
+      "flow": "y",
+      "gap": "Z",
+      "padding": "A B",
+      "background": "surfaceAlt",
+      "borderTop": "1px solid",
+      "borderColor": "borderSubtle",
+      "StepsHeaderRow": {
+        "flow": "x",
+        "align": "center space-between",
+        "marginBottom": "Y",
+        "StepsTitle": {
+          "tag": "h3",
+          "fontSize": "Y",
+          "fontWeight": "700",
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "color": "caption",
+          "text": "Test Steps"
+        },
+        "PreconditionLabel": {
+          "fontSize": "Y",
+          "color": "disabled",
+          "fontStyle": "italic",
+          "text": "(el, s) => s.precondition ? \"Pre: \" + s.precondition : \"\""
+        }
+      },
+      "StepsList": {
+        "flow": "y",
+        "gap": "Y",
+        "children": "(el, s) => s.steps || []",
+        "childExtends": "TestStepItem",
+        "childrenAs": "state"
+      }
+    },
+    "ToastNotification": {
+      "position": "fixed",
+      "bottom": "A",
+      "right": "A",
+      "zIndex": "1100",
+      "flow": "x",
+      "align": "center center",
+      "gap": "Z",
+      "padding": "Z A",
+      "borderRadius": "Z",
+      "boxShadow": "black.25 0 A B Y",
+      "fontSize": "Y",
+      "fontWeight": "500",
+      "maxWidth": "H",
+      "lineHeight": "1.4",
+      "transition": "all 0.25s cubic-bezier(.29,.67,.51,.97)",
+      "if": "(el, s) => !!s.root.toastMessage",
+      "isError": "(el, s) => s.root.toastType === \"error\"",
+      ".isError": {
+        "theme": "statusFail"
+      },
+      "isSuccess": "(el, s) => s.root.toastType === \"success\"",
+      ".isSuccess": {
+        "theme": "statusPass"
+      },
+      "ToastIcon": {
+        "extends": "Icon",
+        "width": "Z",
+        "height": "Z",
+        "flex": "0 0 auto",
+        "icon": "(el, s) => s.root.toastType === \"success\" ? \"checkCircle\" : \"alertTriangle\""
+      },
+      "ToastMessage": {
+        "text": "(el, s) => s.root.toastMessage || \"\""
+      }
+    }
+  },
+  "snippets": {},
+  "pages": {
+    "/": {
+      "extends": "Page",
+      "flow": "y",
+      "width": "100%",
+      "minHeight": "100vh",
+      "DashboardLayout": {}
+    }
+  },
+  "functions": {
+    "applyBulkStatus": "function applyBulkStatus2(newStatus) {\n  const rootEl = this.getRoot();\n  const rootState = rootEl.state;\n  if (!rootState) return;\n  const selected = rootState.selectedTestIds || [];\n  if (selected.length === 0) return;\n  rootState.update({ bulkLoading: true });\n  const runs = (rootState.testRuns || []).map(function(r) {\n    return selected.includes(r.id) ? Object.assign({}, r, { status: newStatus }) : r;\n  });\n  rootState.update({ testRuns: runs });\n  setTimeout(function() {\n    rootEl.state.update({\n      bulkLoading: false,\n      selectedTestIds: [],\n      toastMessage: selected.length + \" tests marked as \" + newStatus,\n      toastType: \"success\"\n    });\n    setTimeout(function() {\n      rootEl.state.update({ toastMessage: null });\n    }, 3e3);\n  }, 600);\n}",
+    "closeLogModal": "function closeLogModal2() {\n  var rootState = this.getRoot().state;\n  if (!rootState) return;\n  rootState.update({\n    logModalOpen: false,\n    logModalTestId: null,\n    logModalContent: null\n  });\n}",
+    "computeMetrics": "function computeMetrics2() {\n  const rootState = this.getRoot().state;\n  const runs = rootState && rootState.testRuns ? rootState.testRuns : [];\n  const total = runs.length;\n  if (total === 0) return { passed: 0, failed: 0, blocked: 0, skipped: 0, total: 0, passRate: 0, failRate: 0, blockedRate: 0, skippedRate: 0 };\n  const passed = runs.filter((r) => r.status === \"passed\").length;\n  const failed = runs.filter((r) => r.status === \"failed\").length;\n  const blocked = runs.filter((r) => r.status === \"blocked\").length;\n  const skipped = runs.filter((r) => r.status === \"skipped\").length;\n  return {\n    total,\n    passed,\n    failed,\n    blocked,\n    skipped,\n    passRate: Math.round(passed / total * 100),\n    failRate: Math.round(failed / total * 100),\n    blockedRate: Math.round(blocked / total * 100),\n    skippedRate: Math.round(skipped / total * 100)\n  };\n}",
+    "formatDuration": "function formatDuration2(ms) {\n  if (!ms || ms === 0) return \"\\u2014\";\n  if (ms < 1e3) return ms + \"ms\";\n  var s = (ms / 1e3).toFixed(1);\n  return s + \"s\";\n}",
+    "getStatusIcon": "function getStatusIcon2(status) {\n  var icons = {\n    passed: \"checkCircle\",\n    failed: \"xCircle\",\n    blocked: \"alertCircle\",\n    skipped: \"minusCircle\",\n    untested: \"minusCircle\"\n  };\n  return icons[status] || \"minusCircle\";\n}",
+    "getStatusLabel": "function getStatusLabel2(status) {\n  var labels = {\n    passed: \"Pass\",\n    failed: \"Fail\",\n    blocked: \"Blocked\",\n    skipped: \"Skipped\",\n    untested: \"Untested\"\n  };\n  return labels[status] || \"Unknown\";\n}",
+    "openLogModal": "function openLogModal2(testId, errorMessage) {\n  var rootState = this.getRoot().state;\n  if (!rootState) return;\n  rootState.update({\n    logModalOpen: true,\n    logModalTestId: testId,\n    logModalContent: errorMessage || \"No error log available for this test run.\"\n  });\n}",
+    "toggleRowExpand": "function toggleRowExpand2(testId) {\n  const rootState = this.getRoot().state;\n  if (!rootState) return;\n  const expanded = rootState.expandedTestIds || [];\n  const isExpanded = expanded.includes(testId);\n  if (isExpanded) {\n    rootState.update({ expandedTestIds: expanded.filter((id) => id !== testId) });\n  } else {\n    rootState.update({ expandedTestIds: expanded.concat([testId]) });\n  }\n}",
+    "toggleSelectAll": "function toggleSelectAll2() {\n  var rootState = this.getRoot().state;\n  if (!rootState) return;\n  var runs = rootState.testRuns || [];\n  var selected = rootState.selectedTestIds || [];\n  var allSelected = selected.length === runs.length;\n  if (allSelected) {\n    rootState.update({ selectedTestIds: [] });\n  } else {\n    rootState.update({ selectedTestIds: runs.map(function(r) {\n      return r.id;\n    }) });\n  }\n}",
+    "toggleSelectTest": "function toggleSelectTest2(testId) {\n  var rootState = this.getRoot().state;\n  if (!rootState) return;\n  var selected = rootState.selectedTestIds || [];\n  var isSelected = selected.includes(testId);\n  if (isSelected) {\n    rootState.update({ selectedTestIds: selected.filter(function(id) {\n      return id !== testId;\n    }) });\n  } else {\n    rootState.update({ selectedTestIds: selected.concat([testId]) });\n  }\n}",
+    "toggleTestStatus": "function toggleTestStatus2(testId, newStatus) {\n  const rootEl = this.getRoot();\n  const rootState = rootEl.state;\n  if (!rootState) return;\n  const runs = rootState.testRuns || [];\n  const idx = runs.findIndex((r) => r.id === testId);\n  if (idx === -1) return;\n  const prevStatus = runs[idx].status;\n  const updatedRuns = runs.map(\n    (r, i) => i === idx ? Object.assign({}, r, { status: newStatus }) : r\n  );\n  rootState.update({ testRuns: updatedRuns });\n  const self = rootEl;\n  setTimeout(() => {\n    const apiFailed = Math.random() < 0.1;\n    if (apiFailed) {\n      const currentState = self.state;\n      const currentRuns = currentState.testRuns || [];\n      const revertedRuns = currentRuns.map(\n        (r, i) => i === idx ? Object.assign({}, r, { status: prevStatus }) : r\n      );\n      currentState.update({\n        testRuns: revertedRuns,\n        toastMessage: \"Failed to update status \\u2014 reverted\",\n        toastType: \"error\"\n      });\n      setTimeout(() => {\n        self.state.update({ toastMessage: null });\n      }, 4e3);\n    }\n  }, 300);\n}"
+  },
+  "methods": {},
+  "designSystem": {
+    "color": {
+      "green": "#389d34",
+      "red": "#e15c55",
+      "yellow": "#EDCB38",
+      "orange": "#e97c16",
+      "transparent": "rgba(0, 0, 0, 0)",
+      "black": "black",
+      "gray": "#4e4e50",
+      "white": "#ffffff",
+      "title": "#ffffff",
+      "caption": "#a3a3a3",
+      "paragraph": "#d4d4d4",
+      "disabled": "#888888",
+      "line": "#333333",
+      "codGray": "#171717",
+      "solitude": "#e5f1ff",
+      "anakiwa": "#a3cdfd",
+      "concrete": "#f2f2f2",
+      "blue": "#0474f2",
+      "phosphorus": "#4db852",
+      "passGreen": "#4ade80",
+      "failRed": "#f87171",
+      "blockedAmber": "#fbbf24",
+      "skippedSlate": "#94a3b8",
+      "surface": "#1c1c1c",
+      "surfaceElevated": "#2d2d2d",
+      "surfaceAlt": "#111111",
+      "borderSubtle": "#333333"
+    },
+    "gradient": {},
+    "theme": {
+      "document": {
+        "background": "surfaceAlt",
+        "color": "title"
+      },
+      "dialog": {
+        "background": "surfaceElevated",
+        "color": "title",
+        "backdropFilter": "blur(3px)",
+        "borderColor": "borderSubtle",
+        "outlineColor": "blue"
+      },
+      "dialog-elevated": {
+        "color": "title",
+        "background": "surfaceElevated",
+        "borderColor": "borderSubtle",
+        "outlineColor": "blue",
+        "backgroundKey": "caption"
+      },
+      "field": {
+        "color": "title",
+        "background": "surface",
+        "::placeholder": {
+          "color": "disabled"
+        }
+      },
+      "primary": {
+        "background": "blue",
+        "color": "white"
+      },
+      "warning": {
+        "background": "red",
+        "color": "white"
+      },
+      "success": {
+        "background": "green",
+        "color": "white"
+      },
+      "none": {
+        "color": "none",
+        "background": "none"
+      },
+      "transparent": {
+        "color": "currentColor",
+        "background": "transparent"
+      },
+      "bordered": {
+        "background": "transparent",
+        "border": "1px solid borderSubtle"
+      },
+      "statusPass": {
+        "background": "passGreen.1",
+        "color": "passGreen-20",
+        "border": "1px solid passGreen.25"
+      },
+      "statusFail": {
+        "background": "failRed.08",
+        "color": "failRed-20",
+        "border": "1px solid failRed.2"
+      },
+      "statusBlocked": {
+        "background": "blockedAmber.1",
+        "color": "blockedAmber-20",
+        "border": "1px solid blockedAmber.25"
+      },
+      "statusSkipped": {
+        "background": "skippedSlate.08",
+        "color": "skippedSlate-20",
+        "border": "1px solid skippedSlate.15"
+      },
+      "card": {
+        "background": "surfaceElevated",
+        "borderColor": "borderSubtle",
+        "border": "1px solid borderSubtle"
+      }
+    },
+    "font": {},
+    "font_family": {
+      "Default": {
+        "isDefault": true,
+        "value": [
+          "Inter, \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+        ],
+        "type": "sans-serif"
+      },
+      "Mono": {
+        "value": [
+          "\"JetBrains Mono\", \"Fira Code\", \"Cascadia Code\", \"Source Code Pro\", Menlo, Monaco, \"Courier New\", monospace"
+        ],
+        "type": "monospace"
+      }
+    },
+    "typography": {
+      "base": 16,
+      "ratio": 1.25,
+      "subSequence": true
+    },
+    "spacing": {
+      "base": 16,
+      "ratio": 1.618,
+      "subSequence": true
+    },
+    "timing": {
+      "defaultBezier": "cubic-bezier(.29, .67, .51, .97)"
+    },
+    "class": {},
+    "grid": {},
+    "icons": {
+      "checkCircle": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"22 4 12 14.01 9 11.01\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "xCircle": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"15\" y1=\"9\" x2=\"9\" y2=\"15\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"9\" y1=\"9\" x2=\"15\" y2=\"15\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "alertCircle": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"16\" r=\"1\" fill=\"currentColor\"/></svg>",
+      "minusCircle": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "chevronDown": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"6 9 12 15 18 9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "chevronRight": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"9 18 15 12 9 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "chevronUp": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"18 15 12 9 6 15\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "close": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "filter": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "play": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"5 3 19 12 5 21 5 3\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "refresh": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"23 4 23 10 17 10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"1 20 1 14 7 14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "logFile": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"14 2 14 8 20 8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><polyline points=\"10 9 9 9 8 9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "clipboard": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\" ry=\"1\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "terminal": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"4 17 10 11 4 5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"12\" y1=\"19\" x2=\"20\" y2=\"19\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "check": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"20 6 9 17 4 12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "alertTriangle": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "barChart": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"10\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "server": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"6\" y1=\"6\" x2=\"6.01\" y2=\"6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"6\" y1=\"18\" x2=\"6.01\" y2=\"18\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>",
+      "layers": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"12 2 2 7 12 12 22 7 12 2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"2 17 12 22 22 17\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"2 12 12 17 22 12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "clock": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\"/><polyline points=\"12 6 12 12 16 14\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "user": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"12\" cy=\"7\" r=\"4\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>",
+      "moreHorizontal": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"19\" cy=\"12\" r=\"1\" fill=\"currentColor\"/><circle cx=\"5\" cy=\"12\" r=\"1\" fill=\"currentColor\"/></svg>"
+    },
+    "shape": {},
+    "reset": {},
+    "animation": {
+      "fadeInUp": {
+        "from": {
+          "transform": "translate3d(0, 12.5%, 1px)",
+          "opacity": 0
+        },
+        "to": {
+          "transform": "translate3d(0, 0, 1px)",
+          "opacity": 1
+        }
+      },
+      "fadeOutDown": {
+        "from": {
+          "transform": "translate3d(0, 0, 1px)",
+          "opacity": 1
+        },
+        "to": {
+          "transform": "translate3d(0, 12.5%, 1px)",
+          "opacity": 0
+        }
+      },
+      "marquee": {
+        "from": {
+          "transform": "translate3d(0, 0, 1px)"
+        },
+        "to": {
+          "transform": "translate3d(-50%, 0, 1px)"
+        }
+      }
+    },
+    "media": {}
+  },
+  "files": {},
+  "sharedLibraries": [],
+  "envs": {},
+  "schema": {
+    "dependencies": {
+      "@supabase/supabase-js": {
+        "key": "@supabase/supabase-js",
+        "resolvedVersion": "^2.102.1",
+        "type": "dependency",
+        "version": "^2.102.1",
+        "status": "done"
+      },
+      "smbls": {
+        "key": "smbls",
+        "resolvedVersion": "*",
+        "type": "dependency",
+        "version": "*",
+        "status": "done"
+      }
+    }
+  }
+}

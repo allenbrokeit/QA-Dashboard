@@ -1,1 +1,185 @@
-export default {}
+export default {
+  // Environment + run type filters
+  activeEnv: 'Staging',
+  activeRunType: 'Full Regression',
+  environments: [
+    { id: 'env_staging_01', name: 'Staging', version: 'v2.4.1' },
+    { id: 'env_uat_01', name: 'UAT', version: 'v2.3.9' },
+    { id: 'env_prod_01', name: 'Production', version: 'v2.3.7' },
+  ],
+  runTypes: ['Smoke', 'Full Regression', 'Sanity', 'Exploratory'],
+
+  // Modal and toast
+  logModalOpen: false,
+  logModalTestId: null,
+  logModalContent: null,
+  toastMessage: null,
+  toastType: 'error',
+
+  // Selected rows for bulk actions
+  selectedTestIds: [],
+  bulkLoading: false,
+
+  // Loading state
+  isLoading: false,
+
+  // Test results data
+  testRuns: [
+    {
+      id: 'TC-8492',
+      title: 'User Login with Valid Credentials',
+      suite: 'Authentication',
+      precondition: 'User account must exist in the system. Browser cookies cleared.',
+      status: 'passed',
+      executionTimeMs: 1240,
+      executedBy: 'runner_bot_1',
+      flakiness: 2,
+      steps: [
+        { stepNumber: 1, action: 'Navigate to /login', expectedResult: 'Login page renders correctly' },
+        { stepNumber: 2, action: 'Enter valid email and password', expectedResult: 'Form fields accept input' },
+        { stepNumber: 3, action: 'Click "Sign In" button', expectedResult: 'User is redirected to dashboard' },
+        { stepNumber: 4, action: 'Verify welcome message present', expectedResult: 'Header shows "Welcome, User"' },
+      ],
+    },
+    {
+      id: 'TC-8493',
+      title: 'User Login with Invalid Password',
+      suite: 'Authentication',
+      precondition: 'User account must exist. Invalid password used.',
+      status: 'passed',
+      executionTimeMs: 890,
+      executedBy: 'runner_bot_1',
+      flakiness: 0,
+      steps: [
+        { stepNumber: 1, action: 'Navigate to /login', expectedResult: 'Login page renders correctly' },
+        { stepNumber: 2, action: 'Enter valid email, invalid password', expectedResult: 'Form accepts input' },
+        { stepNumber: 3, action: 'Click "Sign In" button', expectedResult: 'Error message displayed' },
+      ],
+    },
+    {
+      id: 'TC-8501',
+      title: 'Checkout Flow — Add to Cart',
+      suite: 'Checkout',
+      precondition: 'User is logged in. At least one product exists in catalog.',
+      status: 'failed',
+      executionTimeMs: 3420,
+      executedBy: 'runner_bot_2',
+      flakiness: 5,
+      errorMessage: 'AssertionError: Expected element ".cart-count" to contain "1" but got "0"\n  at CartPage.assertCount (pages/cart.spec.js:88)\n  at Context.<anonymous> (tests/checkout.spec.js:42)\n  at callFn (runner.js:372)',
+      steps: [
+        { stepNumber: 1, action: 'Navigate to /products', expectedResult: 'Product listing page loads' },
+        { stepNumber: 2, action: 'Click "Add to Cart" on first product', expectedResult: 'Cart count increments to 1' },
+        { stepNumber: 3, action: 'Navigate to /cart', expectedResult: 'Cart page shows 1 item' },
+      ],
+    },
+    {
+      id: 'TC-8502',
+      title: 'Checkout Flow — Apply Discount Code',
+      suite: 'Checkout',
+      precondition: 'User has items in cart. Valid discount code SAVE20 exists.',
+      status: 'blocked',
+      executionTimeMs: 0,
+      executedBy: 'runner_bot_2',
+      flakiness: 1,
+      errorMessage: 'BLOCKED: Dependency TC-8501 failed. Cannot proceed with checkout without cart.',
+      steps: [
+        { stepNumber: 1, action: 'Navigate to /cart with items', expectedResult: 'Cart page renders' },
+        { stepNumber: 2, action: 'Enter discount code SAVE20', expectedResult: 'Discount applied, total reduced by 20%' },
+        { stepNumber: 3, action: 'Click "Apply"', expectedResult: 'Order summary updates with discounted price' },
+      ],
+    },
+    {
+      id: 'TC-8510',
+      title: 'Password Reset — Email Delivery',
+      suite: 'Authentication',
+      precondition: 'User account exists. Access to test email inbox required.',
+      status: 'skipped',
+      executionTimeMs: 0,
+      executedBy: 'runner_bot_1',
+      flakiness: 8,
+      steps: [
+        { stepNumber: 1, action: 'Click "Forgot Password" on login page', expectedResult: 'Reset form displays' },
+        { stepNumber: 2, action: 'Enter registered email address', expectedResult: 'Confirmation message shown' },
+        { stepNumber: 3, action: 'Check test email inbox', expectedResult: 'Reset email received within 30s' },
+      ],
+    },
+    {
+      id: 'TC-8520',
+      title: 'Profile — Update Display Name',
+      suite: 'User Profile',
+      precondition: 'User is logged in and on profile settings page.',
+      status: 'passed',
+      executionTimeMs: 670,
+      executedBy: 'runner_bot_3',
+      flakiness: 0,
+      steps: [
+        { stepNumber: 1, action: 'Navigate to /settings/profile', expectedResult: 'Profile settings page loads' },
+        { stepNumber: 2, action: 'Clear display name field and enter new name', expectedResult: 'Field accepts new value' },
+        { stepNumber: 3, action: 'Click "Save Changes"', expectedResult: 'Success toast appears, header updates' },
+      ],
+    },
+    {
+      id: 'TC-8521',
+      title: 'Profile — Upload Avatar Image',
+      suite: 'User Profile',
+      precondition: 'User is logged in. Valid JPG file under 5MB available.',
+      status: 'failed',
+      executionTimeMs: 4100,
+      executedBy: 'runner_bot_3',
+      flakiness: 12,
+      errorMessage: 'TimeoutError: Timed out waiting for upload confirmation after 4000ms\n  Expected: upload success notification\n  Received: spinner still visible (element .upload-spinner still in DOM)\n  at ImageUploadPage.waitForSuccess (pages/profile.spec.js:115)',
+      steps: [
+        { stepNumber: 1, action: 'Click avatar upload zone', expectedResult: 'File picker opens' },
+        { stepNumber: 2, action: 'Select valid JPG file', expectedResult: 'Preview shown' },
+        { stepNumber: 3, action: 'Click "Confirm Upload"', expectedResult: 'Upload completes, avatar updates' },
+      ],
+    },
+    {
+      id: 'TC-8530',
+      title: 'API — GET /users returns 200',
+      suite: 'API Smoke',
+      precondition: 'API service is running. Auth token is valid.',
+      status: 'passed',
+      executionTimeMs: 220,
+      executedBy: 'runner_bot_4',
+      flakiness: 0,
+      steps: [
+        { stepNumber: 1, action: 'Send GET /api/users with Bearer token', expectedResult: 'Response status 200' },
+        { stepNumber: 2, action: 'Validate response schema', expectedResult: 'Array of user objects returned' },
+      ],
+    },
+    {
+      id: 'TC-8531',
+      title: 'API — POST /orders returns 201',
+      suite: 'API Smoke',
+      precondition: 'Auth token valid. Valid product IDs exist.',
+      status: 'blocked',
+      executionTimeMs: 0,
+      executedBy: 'runner_bot_4',
+      flakiness: 3,
+      errorMessage: 'BLOCKED: Environment Staging API gateway returning 503. Service temporarily unavailable.',
+      steps: [
+        { stepNumber: 1, action: 'Send POST /api/orders with order payload', expectedResult: 'Response status 201' },
+        { stepNumber: 2, action: 'Validate order ID in response body', expectedResult: 'Order ID returned' },
+      ],
+    },
+    {
+      id: 'TC-8540',
+      title: 'Responsive Layout — Mobile Breakpoint',
+      suite: 'UI Regression',
+      precondition: 'Browser viewport set to 375x812.',
+      status: 'passed',
+      executionTimeMs: 1850,
+      executedBy: 'runner_bot_5',
+      flakiness: 1,
+      steps: [
+        { stepNumber: 1, action: 'Set viewport to 375x812', expectedResult: 'Viewport resized' },
+        { stepNumber: 2, action: 'Navigate to homepage', expectedResult: 'Mobile layout renders' },
+        { stepNumber: 3, action: 'Verify nav hamburger visible', expectedResult: 'Hamburger icon shown, desktop nav hidden' },
+      ],
+    },
+  ],
+
+  // Expanded rows (tracked by test ID)
+  expandedTestIds: [],
+}

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.102.1",
-    "smbls": "*"
+    "smbls": "3.14.1"
   },
   "publishConfig": {
     "access": "restricted"
